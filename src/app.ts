@@ -11,7 +11,7 @@ console.log("Aplicando middleware CORS");
 
 app.use(cors({
     credentials: true,
-    origin: ["http://localhost:5173", "http://exaple.com"] 
+    origin: ["http://localhost:5173/", "http://exaple.com"] 
 }));
 
 // Middleware para adicionar cabeçalhos CORS (opcional)
