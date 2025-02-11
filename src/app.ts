@@ -1,4 +1,3 @@
-// ENV variables
 require("dotenv").config();
 
 import express from "express";
@@ -7,7 +6,9 @@ const cors = require("cors");
 
 const app = express();
 
-app.use(cors({ credentials: true, origin: "*" }));
+app.use(cors({
+    origin: "*" // Permite qualquer origem
+}));
 
 // JSON middleware
 app.use(express.json());
@@ -35,4 +36,4 @@ app.listen(3000, async () => {
     await db();
 
     Logger.info(`Aplicação está funcionando na porta: ${port}`);
-})
+});
