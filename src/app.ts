@@ -3,8 +3,11 @@ require("dotenv").config();
 
 import express from "express";
 import config from "config";
+const cors = require("cors");
 
 const app = express();
+
+app.use(cors({ credentials: true, origin: "*" }));
 
 // JSON middleware
 app.use(express.json());
