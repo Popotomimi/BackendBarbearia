@@ -12,11 +12,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// ENV variables
 require("dotenv").config();
 const express_1 = __importDefault(require("express"));
 const config_1 = __importDefault(require("config"));
+const cors = require("cors");
 const app = (0, express_1.default)();
+// Adicione um ponto de log para verificação
+console.log("Aplicando middleware CORS");
+app.use(cors({
+    credentials: true,
+    origin: ["http://localhost:5173"]
+}));
+// Middleware para adicionar cabeçalhos CORS (opcional)
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    next();
+});
+// Handle preflight requests
+app.options('*', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.send();
+});
 // JSON middleware
 app.use(express_1.default.json());
 // DB
