@@ -16,7 +16,7 @@ export async function createCliente(req: Request, res: Response) {
     }
 
     if(!date) {
-        res.status(422).json({ message: "Selecione a data do agendamento!" });
+        res.status(422).json({ message: "Selecione a data para agendar!" });
         return;
     }
 
