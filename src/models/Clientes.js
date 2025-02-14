@@ -5,7 +5,9 @@ const mongoose_1 = require("mongoose");
 const clienteSchema = new mongoose_1.Schema({
     name: { type: String },
     date: { type: String },
-    time: { type: String }
+    time: { type: String },
+    service: { type: String },
+    duration: { type: Number }
 }, {
     timestamps: true
 });

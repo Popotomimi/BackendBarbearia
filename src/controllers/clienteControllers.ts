@@ -24,6 +24,7 @@ export async function createCliente(req: Request, res: Response) {
         res.status(422).json({ message: "Selecione a hora do agendamento!" });
         return;
     }
+    
     if(!service) {
         res.status(422).json({ message: "Escolha o serviço!" });
         return;
