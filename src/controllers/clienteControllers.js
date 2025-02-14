@@ -23,17 +23,25 @@ const Clientes_1 = require("../models/Clientes");
 const logger_1 = __importDefault(require("../../config/logger"));
 function createCliente(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { name, date, time } = req.body;
+        const { name, date, time, service, duration } = req.body;
         if (!name) {
             res.status(422).json({ message: "O nome é obirgatório!" });
             return;
         }
         if (!date) {
-            res.status(422).json({ message: "Selecione a data do agendamento!" });
+            res.status(422).json({ message: "Selecione a data para agendar!" });
             return;
         }
         if (!time) {
             res.status(422).json({ message: "Selecione a hora do agendamento!" });
+            return;
+        }
+        if (!service) {
+            res.status(422).json({ message: "Escolha o serviço!" });
+            return;
+        }
+        if (!duration) {
+            res.status(422).json({ message: "Escolha o serviço!!" });
             return;
         }
         try {
