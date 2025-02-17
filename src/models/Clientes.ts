@@ -6,7 +6,8 @@ const clienteSchema = new Schema(
         date: {type: String},
         time: {type: String},
         service: {type: String},
-        duration: {type: Number}
+        duration: {type: Number},
+        barber: {type: String}
     },
     {
         timestamps: true

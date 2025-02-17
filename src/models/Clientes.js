@@ -7,7 +7,8 @@ const clienteSchema = new mongoose_1.Schema({
     date: { type: String },
     time: { type: String },
     service: { type: String },
-    duration: { type: Number }
+    duration: { type: Number },
+    barber: { type: String }
 }, {
     timestamps: true
 });
