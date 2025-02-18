@@ -11,7 +11,7 @@ console.log("Aplicando middleware CORS");
 
 app.use(cors({
     credentials: true,
-    origin: ["http://localhost:5173", "https://agendagabs.netlify.app"]
+    origin: ["http://localhost:5173", "https://meushorarios.netlify.app"]
 }));
 
 // Middleware para adicionar cabeçalhos CORS (opcional)
