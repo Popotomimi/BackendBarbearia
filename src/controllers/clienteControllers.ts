@@ -8,7 +8,7 @@ import Logger from "../../config/logger";
 
 export async function createCliente(req: Request, res: Response) {
 
-    const {name, date, time, service, duration, barber} = req.body;
+    const {name, date, time, service, duration, barber, phone} = req.body;
 
     if(!name) {
         res.status(422).json({ message: "O nome é obirgatório!" });
@@ -37,6 +37,11 @@ export async function createCliente(req: Request, res: Response) {
 
     if(!barber) {
         res.status(422).json({ message: "Escolha o Barbeiro!!" });
+        return;
+    }
+
+    if(!phone) {
+        res.status(422).json({ message: "Digite seu número de telefone!!" });
         return;
     }
 

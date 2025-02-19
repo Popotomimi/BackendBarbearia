@@ -23,7 +23,7 @@ const Clientes_1 = require("../models/Clientes");
 const logger_1 = __importDefault(require("../../config/logger"));
 function createCliente(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { name, date, time, service, duration, barber } = req.body;
+        const { name, date, time, service, duration, barber, phone } = req.body;
         if (!name) {
             res.status(422).json({ message: "O nome é obirgatório!" });
             return;
@@ -46,6 +46,10 @@ function createCliente(req, res) {
         }
         if (!barber) {
             res.status(422).json({ message: "Escolha o Barbeiro!!" });
+            return;
+        }
+        if (!phone) {
+            res.status(422).json({ message: "Digite seu número de telefone!!" });
             return;
         }
         try {
