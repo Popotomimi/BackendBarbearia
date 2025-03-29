@@ -25,8 +25,10 @@ const schedule = require("node-schedule");
 function enviarMensagem(telefone, mensagem) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield client.sendMessage(`${telefone}@c.us`, mensagem);
-            console.log(`Mensagem enviada para ${telefone}: ${mensagem}`);
+            // Remover '+' do início do telefone, se existir
+            const numeroFormatado = telefone.replace("+", "");
+            yield client.sendMessage(`${numeroFormatado}@c.us`, mensagem);
+            console.log(`Mensagem enviada para ${numeroFormatado}: ${mensagem}`);
         }
         catch (error) {
             logger_1.default.error(`Erro ao enviar mensagem para ${telefone}: ${error.message}`);
@@ -36,7 +38,13 @@ function enviarMensagem(telefone, mensagem) {
 // Função para agendar mensagens
 function agendarMensagem(telefone, horarioAgendado, mensagem) {
     const horario = new Date(horarioAgendado);
-    horario.setMinutes(horario.getMinutes() - 15); // Enviar 15 minutos antes
+    if (isNaN(horario.getTime())) {
+        console.error("Horário inválido para o agendamento:", horarioAgendado);
+        return;
+    }
+    // Subtrair 15 minutos do horário para o envio da mensagem
+    horario.setMinutes(horario.getMinutes() - 15);
+    // Agendar a mensagem
     schedule.scheduleJob(horario, () => {
         enviarMensagem(telefone, mensagem);
     });

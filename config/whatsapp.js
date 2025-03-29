@@ -27,6 +27,7 @@ client.on("error", (error) => {
 // Desconexão do cliente
 client.on("disconnected", (reason) => {
   console.log(`Cliente desconectado: ${reason}`);
+  client.initialize(); // Reinicializa o cliente em caso de desconexão
 });
 
 // Inicializar o cliente WhatsApp

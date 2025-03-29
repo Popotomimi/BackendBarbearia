@@ -10,8 +10,10 @@ async function enviarMensagem(
   mensagem: string
 ): Promise<void> {
   try {
-    await client.sendMessage(`${telefone}@c.us`, mensagem);
-    console.log(`Mensagem enviada para ${telefone}: ${mensagem}`);
+    // Remover '+' do início do telefone, se existir
+    const numeroFormatado = telefone.replace("+", "");
+    await client.sendMessage(`${numeroFormatado}@c.us`, mensagem);
+    console.log(`Mensagem enviada para ${numeroFormatado}: ${mensagem}`);
   } catch (error: any) {
     Logger.error(`Erro ao enviar mensagem para ${telefone}: ${error.message}`);
   }
@@ -24,7 +26,16 @@ function agendarMensagem(
   mensagem: string
 ): void {
   const horario = new Date(horarioAgendado);
-  horario.setMinutes(horario.getMinutes() - 15); // Enviar 15 minutos antes
+
+  if (isNaN(horario.getTime())) {
+    console.error("Horário inválido para o agendamento:", horarioAgendado);
+    return;
+  }
+
+  // Subtrair 15 minutos do horário para o envio da mensagem
+  horario.setMinutes(horario.getMinutes() - 15);
+
+  // Agendar a mensagem
   schedule.scheduleJob(horario, () => {
     enviarMensagem(telefone, mensagem);
   });
