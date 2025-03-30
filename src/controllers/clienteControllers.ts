@@ -32,11 +32,16 @@ function agendarMensagem(
     return;
   }
 
-  // Subtrair 15 minutos do horário para o envio da mensagem
+  // Subtrair 15 minutos
   horario.setMinutes(horario.getMinutes() - 15);
+
+  console.log(
+    `Agendamento configurado para ${telefone} às ${horario.toISOString()}`
+  );
 
   // Agendar a mensagem
   schedule.scheduleJob(horario, () => {
+    console.log(`Enviando mensagem agendada para ${telefone}`);
     enviarMensagem(telefone, mensagem);
   });
 }
