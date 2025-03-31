@@ -3,6 +3,7 @@ import { ClienteModel } from "../models/Clientes";
 import Logger from "../../config/logger";
 const client = require("../../config/whatsapp.js");
 const schedule = require("node-schedule");
+import { DateTime } from "luxon";
 
 // Função para enviar mensagens pelo WhatsApp
 async function enviarMensagem(
@@ -23,18 +24,21 @@ async function enviarMensagem(
 // Função para agendar mensagens
 function agendarMensagem(
   telefone: string,
-  horarioAgendado: string,
+  date: string,
+  time: string,
   mensagem: string
 ): void {
-  const horario = new Date(horarioAgendado);
+  // Construir horário com luxon
+  const horarioAgendado = DateTime.fromISO(`${date}T${time}`);
 
-  if (isNaN(horario.getTime())) {
-    console.error("Horário inválido para o agendamento:", horarioAgendado);
+  // Verificar se o horário é válido
+  if (!horarioAgendado.isValid) {
+    console.error("Horário inválido para o agendamento:", `${date}T${time}`);
     return;
   }
 
-  // Subtrair 15 minutos do horário para o envio da mensagem
-  horario.setMinutes(horario.getMinutes() - 15);
+  // Subtrair 15 minutos
+  const horario = horarioAgendado.minus({ minutes: 15 }).toJSDate();
 
   console.log(
     `Agendamento configurado para ${telefone} às ${horario.toISOString()}`
