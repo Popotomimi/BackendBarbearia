@@ -12,6 +12,7 @@ async function enviarMensagem(
   try {
     // Remover '+' do início do telefone, se existir
     const numeroFormatado = telefone.replace("+", "");
+    console.log(`Tentando enviar mensagem para ${numeroFormatado}`);
     await client.sendMessage(`${numeroFormatado}@c.us`, mensagem);
     console.log(`Mensagem enviada para ${numeroFormatado}: ${mensagem}`);
   } catch (error: any) {
@@ -32,7 +33,7 @@ function agendarMensagem(
     return;
   }
 
-  // Subtrair 15 minutos
+  // Subtrair 15 minutos do horário para o envio da mensagem
   horario.setMinutes(horario.getMinutes() - 15);
 
   console.log(
