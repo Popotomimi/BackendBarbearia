@@ -1,4 +1,58 @@
-2025/03/31-08:30:57.145 1084 Reusing MANIFEST C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2025/03/31-08:30:57.145 1084 Recovering log #304
-2025/03/31-08:30:57.176 1084 Reusing old log C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000304.log 
-2025/03/31-08:30:58.964 2c74 Manual compaction at level-0 from '\x00\x1c\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1d\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/03/31-18:17:26.481 37a4 Reusing MANIFEST C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/03/31-18:17:26.481 37a4 Recovering log #317
+2025/03/31-18:17:26.512 37a4 Reusing old log C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000317.log 
+2025/03/31-18:17:28.282 37a4 Level-0 table #331: started
+2025/03/31-18:17:28.293 37a4 Level-0 table #331: 218165 bytes OK
+2025/03/31-18:17:28.296 37a4 Delete type=0 #317
+2025/03/31-18:17:28.297 37a4 Manual compaction at level-0 from '\x00\x1e\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1f\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/03/31-18:17:30.947 51ac Compacting 1@1 + 10@2 files
+2025/03/31-18:17:31.017 51ac Generated table #332@1: 30613 keys, 2190992 bytes
+2025/03/31-18:17:31.068 51ac Generated table #333@1: 3548 keys, 2159246 bytes
+2025/03/31-18:17:31.119 51ac Generated table #334@1: 2493 keys, 2161506 bytes
+2025/03/31-18:17:31.166 51ac Generated table #335@1: 2829 keys, 2160061 bytes
+2025/03/31-18:17:31.231 51ac Generated table #336@1: 20185 keys, 2199081 bytes
+2025/03/31-18:17:31.334 51ac Generated table #337@1: 25906 keys, 2270148 bytes
+2025/03/31-18:17:31.414 51ac Generated table #338@1: 18945 keys, 2182913 bytes
+2025/03/31-18:17:31.527 51ac Generated table #339@1: 80220 keys, 2223173 bytes
+2025/03/31-18:17:31.666 51ac Generated table #340@1: 104580 keys, 2255702 bytes
+2025/03/31-18:17:31.732 51ac Generated table #341@1: 46191 keys, 999193 bytes
+2025/03/31-18:17:31.732 51ac Compacted 1@1 + 10@2 files => 20802015 bytes
+2025/03/31-18:17:31.735 51ac compacted to: files[ 0 0 10 0 0 0 0 ]
+2025/03/31-18:17:31.735 51ac Delete type=2 #319
+2025/03/31-18:17:31.735 51ac Delete type=2 #320
+2025/03/31-18:17:31.735 51ac Delete type=2 #321
+2025/03/31-18:17:31.735 51ac Delete type=2 #322
+2025/03/31-18:17:31.735 51ac Delete type=2 #323
+2025/03/31-18:17:31.735 51ac Delete type=2 #324
+2025/03/31-18:17:31.735 51ac Delete type=2 #325
+2025/03/31-18:17:31.735 51ac Delete type=2 #326
+2025/03/31-18:17:31.735 51ac Delete type=2 #327
+2025/03/31-18:17:31.736 51ac Delete type=2 #328
+2025/03/31-18:17:31.736 51ac Delete type=2 #331
+2025/03/31-18:34:20.419 4f24 Level-0 table #343: started
+2025/03/31-18:34:20.454 4f24 Level-0 table #343: 1174156 bytes OK
+2025/03/31-18:34:20.457 4f24 Delete type=0 #330
+2025/03/31-18:34:20.884 25a0 Compacting 1@1 + 10@2 files
+2025/03/31-18:34:20.966 25a0 Generated table #344@1: 33237 keys, 2192205 bytes
+2025/03/31-18:34:21.003 25a0 Generated table #345@1: 3584 keys, 2159868 bytes
+2025/03/31-18:34:21.038 25a0 Generated table #346@1: 2498 keys, 2161325 bytes
+2025/03/31-18:34:21.074 25a0 Generated table #347@1: 2782 keys, 2158917 bytes
+2025/03/31-18:34:21.136 25a0 Generated table #348@1: 18939 keys, 2194385 bytes
+2025/03/31-18:34:21.227 25a0 Generated table #349@1: 25864 keys, 2269457 bytes
+2025/03/31-18:34:21.288 25a0 Generated table #350@1: 19905 keys, 2190035 bytes
+2025/03/31-18:34:21.393 25a0 Generated table #351@1: 72786 keys, 2214803 bytes
+2025/03/31-18:34:21.549 25a0 Generated table #352@1: 104908 keys, 2256213 bytes
+2025/03/31-18:34:21.670 25a0 Generated table #353@1: 61800 keys, 1325795 bytes
+2025/03/31-18:34:21.670 25a0 Compacted 1@1 + 10@2 files => 21123003 bytes
+2025/03/31-18:34:21.673 25a0 compacted to: files[ 0 0 10 0 0 0 0 ]
+2025/03/31-18:34:21.674 25a0 Delete type=2 #332
+2025/03/31-18:34:21.674 25a0 Delete type=2 #333
+2025/03/31-18:34:21.674 25a0 Delete type=2 #334
+2025/03/31-18:34:21.674 25a0 Delete type=2 #335
+2025/03/31-18:34:21.674 25a0 Delete type=2 #336
+2025/03/31-18:34:21.674 25a0 Delete type=2 #337
+2025/03/31-18:34:21.674 25a0 Delete type=2 #338
+2025/03/31-18:34:21.674 25a0 Delete type=2 #339
+2025/03/31-18:34:21.674 25a0 Delete type=2 #340
+2025/03/31-18:34:21.674 25a0 Delete type=2 #341
+2025/03/31-18:34:21.674 25a0 Delete type=2 #343
