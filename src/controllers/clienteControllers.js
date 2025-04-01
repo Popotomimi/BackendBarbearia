@@ -21,12 +21,13 @@ const Clientes_1 = require("../models/Clientes");
 const logger_1 = __importDefault(require("../../config/logger"));
 const client = require("../../config/whatsapp.js");
 const schedule = require("node-schedule");
+const luxon_1 = require("luxon");
 // Função para enviar mensagens pelo WhatsApp
 function enviarMensagem(telefone, mensagem) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            // Remover '+' do início do telefone, se existir
             const numeroFormatado = telefone.replace("+", "");
+            console.log(`Tentando enviar mensagem para ${numeroFormatado}`);
             yield client.sendMessage(`${numeroFormatado}@c.us`, mensagem);
             console.log(`Mensagem enviada para ${numeroFormatado}: ${mensagem}`);
         }
@@ -35,17 +36,23 @@ function enviarMensagem(telefone, mensagem) {
         }
     });
 }
-// Função para agendar mensagens
-function agendarMensagem(telefone, horarioAgendado, mensagem) {
-    const horario = new Date(horarioAgendado);
-    if (isNaN(horario.getTime())) {
-        console.error("Horário inválido para o agendamento:", horarioAgendado);
+// Função para agendar mensagens com ajuste de fuso horário
+function agendarMensagem(telefone, date, time, mensagem) {
+    // Construir horário com luxon ajustando para o fuso horário de São Paulo
+    const horarioAgendado = luxon_1.DateTime.fromISO(`${date}T${time}`, {
+        zone: "America/Sao_Paulo",
+    });
+    // Verificar se o horário é válido
+    if (!horarioAgendado.isValid) {
+        console.error("Horário inválido para o agendamento:", `${date}T${time}`);
         return;
     }
-    // Subtrair 15 minutos do horário para o envio da mensagem
-    horario.setMinutes(horario.getMinutes() - 15);
+    // Subtrair 15 minutos
+    const horario = horarioAgendado.minus({ minutes: 15 }).toJSDate();
+    console.log(`Agendamento configurado para ${telefone} às ${horario.toISOString()}`);
     // Agendar a mensagem
     schedule.scheduleJob(horario, () => {
+        console.log(`Enviando mensagem agendada para ${telefone}`);
         enviarMensagem(telefone, mensagem);
     });
 }
@@ -53,7 +60,6 @@ function agendarMensagem(telefone, horarioAgendado, mensagem) {
 function createCliente(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { name, date, time, service, barber, phone } = req.body;
-        // Validação dos campos obrigatórios
         if (!name || !date || !time || !service || !barber || !phone) {
             return res
                 .status(422)
@@ -62,11 +68,9 @@ function createCliente(req, res) {
         try {
             const data = req.body;
             const cliente = yield Clientes_1.ClienteModel.create(data);
-            // Mensagem personalizada para o cliente
             const mensagem = `Olá ${cliente.name}, está quase na hora do seu corte! Serviço: ${cliente.service} com ${cliente.barber} às ${cliente.time}.`;
-            const horarioAgendado = `${cliente.date}T${cliente.time}`;
             if (typeof cliente.phone === "string") {
-                agendarMensagem(cliente.phone, horarioAgendado, mensagem);
+                agendarMensagem(cliente.phone, cliente.date, cliente.time, mensagem);
             }
             else {
                 throw new Error("Número de telefone inválido ou ausente.");
@@ -85,7 +89,6 @@ function createCliente(req, res) {
         }
     });
 }
-// Buscar cliente por ID
 function findClienteById(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -97,29 +100,23 @@ function findClienteById(req, res) {
             return res.status(200).json(cliente);
         }
         catch (e) {
-            if (e instanceof Error) {
-                logger_1.default.error(`Erro no sistema: ${e.message}`);
-                return res.status(500).json({ error: "Por favor, tente mais tarde!" });
-            }
+            logger_1.default.error(`Erro no sistema: ${e.message}`);
+            return res.status(500).json({ error: "Por favor, tente mais tarde!" });
         }
     });
 }
-// Listar todos os clientes
 function getAllClientes(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const clientes = yield Clientes_1.ClienteModel.find();
-            return res.status(200).json(clientes);
+            const clietes = yield Clientes_1.ClienteModel.find();
+            return res.status(200).json(clietes);
         }
         catch (e) {
-            if (e instanceof Error) {
-                logger_1.default.error(`Erro no sistema: ${e.message}`);
-                return res.status(500).json({ error: "Por favor, tente mais tarde!" });
-            }
+            logger_1.default.error(`Erro no sistema: ${e.message}`);
+            return res.status(500).json({ error: "Por favor, tente mais tarde!" });
         }
     });
 }
-// Remover cliente
 function RemoveCliente(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -129,17 +126,14 @@ function RemoveCliente(req, res) {
                 return res.status(404).json({ error: "O Cliente não existe!" });
             }
             yield cliente.deleteOne();
-            return res.status(200).json({ message: "Cliente removido com sucesso!" });
+            return res.status(200).json({ message: "Cliente removido som sucesso!" });
         }
         catch (e) {
-            if (e instanceof Error) {
-                logger_1.default.error(`Erro no sistema: ${e.message}`);
-                return res.status(500).json({ error: "Por favor, tente mais tarde!" });
-            }
+            logger_1.default.error(`Erro no sistema: ${e.message}`);
+            return res.status(500).json({ error: "Por favor, tente mais tarde!" });
         }
     });
 }
-// Atualizar cliente
 function updateCliente(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -153,10 +147,8 @@ function updateCliente(req, res) {
             return res.status(200).json({ cliente });
         }
         catch (e) {
-            if (e instanceof Error) {
-                logger_1.default.error(`Erro no sistema: ${e.message}`);
-                return res.status(500).json({ error: "Por favor, tente mais tarde!" });
-            }
+            logger_1.default.error(`Erro no sistema: ${e.message}`);
+            return res.status(500).json({ error: "Por favor, tente mais tarde!" });
         }
     });
 }

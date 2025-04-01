@@ -1,31 +1,4 @@
-2025/03/31-18:05:20.721 566c Reusing MANIFEST C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2025/03/31-18:05:20.721 566c Recovering log #304
-2025/03/31-18:05:20.958 566c Reusing old log C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000304.log 
-2025/03/31-18:05:22.712 1890 Level-0 table #318: started
-2025/03/31-18:05:22.753 1890 Level-0 table #318: 1058113 bytes OK
-2025/03/31-18:05:22.756 1890 Delete type=0 #304
-2025/03/31-18:05:22.757 1890 Manual compaction at level-0 from '\x00\x1d\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1e\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/03/31-18:05:25.356 3448 Compacting 1@1 + 10@2 files
-2025/03/31-18:05:25.448 3448 Generated table #319@1: 28810 keys, 2195709 bytes
-2025/03/31-18:05:25.498 3448 Generated table #320@1: 3533 keys, 2160253 bytes
-2025/03/31-18:05:25.550 3448 Generated table #321@1: 2488 keys, 2162066 bytes
-2025/03/31-18:05:25.595 3448 Generated table #322@1: 2866 keys, 2158157 bytes
-2025/03/31-18:05:25.665 3448 Generated table #323@1: 21055 keys, 2202739 bytes
-2025/03/31-18:05:25.760 3448 Generated table #324@1: 25765 keys, 2269504 bytes
-2025/03/31-18:05:25.822 3448 Generated table #325@1: 18565 keys, 2180457 bytes
-2025/03/31-18:05:25.936 3448 Generated table #326@1: 83253 keys, 2228975 bytes
-2025/03/31-18:05:26.087 3448 Generated table #327@1: 104795 keys, 2255901 bytes
-2025/03/31-18:05:26.156 3448 Generated table #328@1: 42356 keys, 915136 bytes
-2025/03/31-18:05:26.156 3448 Compacted 1@1 + 10@2 files => 20728897 bytes
-2025/03/31-18:05:26.159 3448 compacted to: files[ 0 0 10 0 0 0 0 ]
-2025/03/31-18:05:26.159 3448 Delete type=2 #306
-2025/03/31-18:05:26.159 3448 Delete type=2 #307
-2025/03/31-18:05:26.159 3448 Delete type=2 #308
-2025/03/31-18:05:26.159 3448 Delete type=2 #309
-2025/03/31-18:05:26.159 3448 Delete type=2 #310
-2025/03/31-18:05:26.160 3448 Delete type=2 #311
-2025/03/31-18:05:26.160 3448 Delete type=2 #312
-2025/03/31-18:05:26.160 3448 Delete type=2 #313
-2025/03/31-18:05:26.160 3448 Delete type=2 #314
-2025/03/31-18:05:26.160 3448 Delete type=2 #315
-2025/03/31-18:05:26.160 3448 Delete type=2 #318
+2025/03/31-20:26:24.936 2efc Reusing MANIFEST C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/03/31-20:26:24.936 2efc Recovering log #355
+2025/03/31-20:26:24.957 2efc Reusing old log C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000355.log 
+2025/03/31-20:26:26.670 3664 Manual compaction at level-0 from '\x00 \x00\x00\x00' @ 72057594037927935 : 1 .. '\x00!\x00\x00\x00' @ 0 : 0; will stop at (end)
