@@ -4,6 +4,7 @@ import Logger from "../../config/logger";
 const client = require("../../config/whatsapp.js");
 const schedule = require("node-schedule");
 import { DateTime } from "luxon";
+import manterServidorAtivo from "../utils/manterServidorAtivo";
 
 // Função para enviar mensagens pelo WhatsApp
 async function enviarMensagem(
@@ -45,6 +46,8 @@ function agendarMensagem(
     `Agendamento configurado para ${telefone} às ${horario.toISOString()}`
   );
 
+  manterServidorAtivo();
+
   // Agendar a mensagem
   schedule.scheduleJob(horario, () => {
     console.log(`Enviando mensagem agendada para ${telefone}`);
@@ -66,8 +69,12 @@ export async function createCliente(req: Request, res: Response) {
     const data = req.body;
     const cliente = await ClienteModel.create(data);
 
-    const mensagem = `Olá ${cliente.name}, está quase na hora do seu corte! Serviço: ${cliente.service} com ${cliente.barber} às ${cliente.time}.`;
-    if (typeof cliente.phone === "string") {
+    const mensagem = `Olá ${cliente.name}, está quase na hora! Serviço: ${cliente.service} com ${cliente.barber} às ${cliente.time}.`;
+    if (
+      typeof cliente.phone === "string" &&
+      typeof cliente.date === "string" &&
+      typeof cliente.time === "string"
+    ) {
       agendarMensagem(cliente.phone, cliente.date, cliente.time, mensagem);
     } else {
       throw new Error("Número de telefone inválido ou ausente.");
