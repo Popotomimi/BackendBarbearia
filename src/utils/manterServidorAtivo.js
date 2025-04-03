@@ -17,26 +17,18 @@ const axios_1 = __importDefault(require("axios"));
 let intervalo;
 function manterServidorAtivo() {
     intervalo = setInterval(() => __awaiter(this, void 0, void 0, function* () {
-        const agora = new Date();
-        const hora = agora.getHours();
-        if (hora >= 8 && hora < 22) {
-            try {
-                // Faz a requisição GET para a própria aplicação
-                const response = yield axios_1.default.get("https://backendbarbearia-6205.onrender.com/api/test"); // Ajuste a URL conforme necessário
-                console.log("Requisição bem-sucedida:", response.data);
-            }
-            catch (error) {
-                if (error instanceof Error) {
-                    console.error("Erro:", error.message);
-                }
-                else {
-                    console.error("Erro desconhecido:", error);
-                }
-            }
+        try {
+            // Faz a requisição GET para a própria aplicação
+            const response = yield axios_1.default.get("https://backendbarbearia-6205.onrender.com/api/test"); // Ajuste a URL conforme necessário
+            console.log("Requisição bem-sucedida:", response.data);
         }
-        else {
-            console.log("Fora do período de funcionamento. Cancelando intervalo.");
-            clearInterval(intervalo);
+        catch (error) {
+            if (error instanceof Error) {
+                console.error("Erro:", error.message);
+            }
+            else {
+                console.error("Erro desconhecido:", error);
+            }
         }
     }), 600000); // Executa a cada 10 minutos (600.000ms)
 }
