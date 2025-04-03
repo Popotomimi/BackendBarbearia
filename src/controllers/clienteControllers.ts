@@ -4,7 +4,6 @@ import Logger from "../../config/logger";
 const client = require("../../config/whatsapp.js");
 const schedule = require("node-schedule");
 import { DateTime } from "luxon";
-import manterServidorAtivo from "../utils/manterServidorAtivo";
 
 // Função para enviar mensagens pelo WhatsApp
 async function enviarMensagem(
@@ -45,9 +44,7 @@ function agendarMensagem(
   console.log(
     `Agendamento configurado para ${telefone} às ${horario.toISOString()}`
   );
-
-  manterServidorAtivo();
-
+  
   // Agendar a mensagem
   schedule.scheduleJob(horario, () => {
     console.log(`Enviando mensagem agendada para ${telefone}`);

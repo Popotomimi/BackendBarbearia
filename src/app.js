@@ -16,12 +16,13 @@ require("dotenv").config();
 const express_1 = __importDefault(require("express"));
 const config_1 = __importDefault(require("config"));
 const cors = require("cors");
+const manterServidorAtivo_1 = __importDefault(require("./utils/manterServidorAtivo"));
 const app = (0, express_1.default)();
 // Adicione um ponto de log para verificação
 console.log("Aplicando middleware CORS");
 app.use(cors({
     credentials: true,
-    origin: ["http://localhost:5173", "https://meushorarios.netlify.app"]
+    origin: ["http://localhost:5173", "https://meushorarios.netlify.app"],
 }));
 // Middleware para adicionar cabeçalhos CORS (opcional)
 app.use((req, res, next) => {
@@ -31,7 +32,7 @@ app.use((req, res, next) => {
     next();
 });
 // Handle preflight requests
-app.options('*', (req, res) => {
+app.options("*", (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
@@ -49,6 +50,8 @@ const router_1 = __importDefault(require("./router"));
 const logger_1 = __importDefault(require("../config/logger"));
 // Middlewares
 const morgamMiddleware_1 = __importDefault(require("./middleware/morgamMiddleware"));
+// Manter o servidor on
+(0, manterServidorAtivo_1.default)();
 app.use(morgamMiddleware_1.default);
 app.use("/api/", router_1.default);
 app.listen(3000, () => __awaiter(void 0, void 0, void 0, function* () {

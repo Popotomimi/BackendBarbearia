@@ -4,30 +4,40 @@ import express from "express";
 import config from "config";
 const cors = require("cors");
 
+import manterServidorAtivo from "./utils/manterServidorAtivo";
+
 const app = express();
 
 // Adicione um ponto de log para verificação
 console.log("Aplicando middleware CORS");
 
-app.use(cors({
+app.use(
+  cors({
     credentials: true,
-    origin: ["http://localhost:5173", "https://meushorarios.netlify.app"]
-}));
+    origin: ["http://localhost:5173", "https://meushorarios.netlify.app"],
+  })
+);
 
 // Middleware para adicionar cabeçalhos CORS (opcional)
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    next();
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  next();
 });
 
 // Handle preflight requests
-app.options('*', (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    res.send();
+app.options("*", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.send();
 });
 
 // JSON middleware
@@ -48,12 +58,15 @@ import Logger from "../config/logger";
 // Middlewares
 import morganMiddleware from "./middleware/morgamMiddleware";
 
+// Manter o servidor on
+manterServidorAtivo();
+
 app.use(morganMiddleware);
 
 app.use("/api/", router);
 
 app.listen(3000, async () => {
-    await db();
+  await db();
 
-    Logger.info(`Aplicação está funcionando na porta: ${port}`);
+  Logger.info(`Aplicação está funcionando na porta: ${port}`);
 });
