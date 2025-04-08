@@ -1,12 +1,16 @@
 require("dotenv").config();
 
 import express from "express";
+import { inicializarAgendador } from "./services/agendaScheduler";
 import config from "config";
 const cors = require("cors");
 
 import manterServidorAtivo from "./utils/manterServidorAtivo";
 
 const app = express();
+
+// Inicializar o agendador
+inicializarAgendador();
 
 // Adicione um ponto de log para verificação
 console.log("Aplicando middleware CORS");

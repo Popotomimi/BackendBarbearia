@@ -1,18 +1,25 @@
-import {model, Schema} from "mongoose";
+import { model, Schema } from "mongoose";
 
 const clienteSchema = new Schema(
-    {
-        name: {type: String},
-        date: {type: String},
-        time: {type: String},
-        service: {type: String},
-        duration: {type: Number},
-        barber: {type: String},
-        phone: {type: String}
-    },
-    {
-        timestamps: true
-    }
-)
+  {
+    name: { type: String },
+    date: { type: String },
+    time: { type: String },
+    service: { type: String },
+    duration: { type: Number },
+    barber: { type: String },
+    phone: { type: String },
+    history: [
+      {
+        date: { type: String },
+        service: { type: String },
+        barber: { type: String },
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
 
-export const ClienteModel = model("Cliente", clienteSchema)
+export const ClienteModel = model("Cliente", clienteSchema);

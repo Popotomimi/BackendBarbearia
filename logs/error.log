@@ -1,1 +1,12 @@
 2025-02-10 19:57:16:5716 - [31merror[39m: [31mErro no sistema: Cannot set headers after they are sent to the client[39m
+2025-04-08 15:54:27:5427 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "agendadodia" (type string) at path "_id" for model "Cliente"[39m
+2025-04-08 16:00:26:026 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "agendadodia" (type string) at path "_id" for model "Cliente"[39m
+2025-04-08 16:21:02:212 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "agendadodia" (type string) at path "_id" for model "Cliente"[39m
+2025-04-08 16:21:29:2129 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "agendadodia" (type string) at path "_id" for model "Cliente"[39m
+2025-04-08 16:23:44:2344 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "agendadodia" (type string) at path "_id" for model "Cliente"[39m
+2025-04-08 16:24:40:2440 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "agendadodia" (type string) at path "_id" for model "Cliente"[39m
+2025-04-08 16:26:51:2651 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "agendadodia" (type string) at path "_id" for model "Cliente"[39m
+2025-04-08 16:29:22:2922 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "agendadodia" (type string) at path "_id" for model "Cliente"[39m
+2025-04-08 16:31:38:3138 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "agendadodia" (type string) at path "_id" for model "Cliente"[39m
+2025-04-08 16:38:25:3825 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "agendadodia" (type string) at path "_id" for model "Cliente"[39m
+2025-04-08 16:39:28:3928 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "agendadodia" (type string) at path "_id" for model "Cliente"[39m

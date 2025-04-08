@@ -44,7 +44,7 @@ function agendarMensagem(
   console.log(
     `Agendamento configurado para ${telefone} às ${horario.toISOString()}`
   );
-  
+
   // Agendar a mensagem
   schedule.scheduleJob(horario, () => {
     console.log(`Enviando mensagem agendada para ${telefone}`);
@@ -63,6 +63,18 @@ export async function createCliente(req: Request, res: Response) {
   }
 
   try {
+    // Validar se a data e horário estão no futuro
+    const dataAtual = DateTime.now().setZone("America/Sao_Paulo");
+    const dataAgendada = DateTime.fromISO(`${date}T${time}`, {
+      zone: "America/Sao_Paulo",
+    });
+
+    if (!dataAgendada.isValid || dataAgendada <= dataAtual) {
+      return res
+        .status(422)
+        .json({ message: "A data e o horário devem ser no futuro!" });
+    }
+
     const data = req.body;
     const cliente = await ClienteModel.create(data);
 
@@ -74,7 +86,7 @@ export async function createCliente(req: Request, res: Response) {
     ) {
       agendarMensagem(cliente.phone, cliente.date, cliente.time, mensagem);
     } else {
-      throw new Error("Número de telefone inválido ou ausente.");
+      throw new Error("Dados inválidos ou ausentes.");
     }
 
     return res.status(201).json(cliente);
@@ -89,6 +101,28 @@ export async function createCliente(req: Request, res: Response) {
   }
 }
 
+// Função para buscar clientes do dia
+export async function getUsuariosDoDia(req: Request, res: Response) {
+  try {
+    // Obter a data atual no formato "YYYY-MM-DD"
+    const dataAtual = DateTime.now().setZone("America/Sao_Paulo").toISODate();
+
+    // Buscar todos os usuários do banco de dados
+    const todosUsuarios = await ClienteModel.find();
+
+    // Filtrar os usuários com a data atual
+    const usuariosDoDia = todosUsuarios.filter(
+      (usuario) => usuario.date === dataAtual
+    );
+
+    // Retornar a resposta com os usuários filtrados
+    return res.status(200).json(usuariosDoDia);
+  } catch (error) {
+    return res.status(500).json({ error: "Por favor, tente mais tarde!" });
+  }
+}
+
+// Função para buscar um cliente pelo ID
 export async function findClienteById(req: Request, res: Response) {
   try {
     const id = req.params.id;
@@ -105,6 +139,7 @@ export async function findClienteById(req: Request, res: Response) {
   }
 }
 
+// Função para buscar todos os clientes
 export async function getAllClientes(req: Request, res: Response) {
   try {
     const clietes = await ClienteModel.find();
@@ -115,6 +150,18 @@ export async function getAllClientes(req: Request, res: Response) {
   }
 }
 
+// Função para cancelar um agendamento
+function cancelarAgendamento(telefone: string): void {
+  const jobs = schedule.scheduledJobs;
+  for (const jobName in jobs) {
+    if (jobName.includes(telefone)) {
+      console.log(`Cancelando agendamento para ${telefone}`);
+      jobs[jobName].cancel();
+    }
+  }
+}
+
+// Atualizar função RemoveCliente
 export async function RemoveCliente(req: Request, res: Response) {
   try {
     const id = req.params.id;
@@ -124,15 +171,21 @@ export async function RemoveCliente(req: Request, res: Response) {
       return res.status(404).json({ error: "O Cliente não existe!" });
     }
 
+    // Cancelar agendamento associado
+    if (typeof cliente.phone === "string") {
+      cancelarAgendamento(cliente.phone);
+    }
+
     await cliente.deleteOne();
 
-    return res.status(200).json({ message: "Cliente removido som sucesso!" });
+    return res.status(200).json({ message: "Cliente removido com sucesso!" });
   } catch (e: any) {
     Logger.error(`Erro no sistema: ${e.message}`);
     return res.status(500).json({ error: "Por favor, tente mais tarde!" });
   }
 }
 
+// Atualizar função updateCliente
 export async function updateCliente(req: Request, res: Response) {
   try {
     const id = req.params.id;
@@ -143,9 +196,29 @@ export async function updateCliente(req: Request, res: Response) {
       return res.status(404).json({ error: "O Cliente não existe!" });
     }
 
+    // Cancelar agendamento anterior
+    if (typeof cliente.phone === "string") {
+      cancelarAgendamento(cliente.phone);
+    }
+
+    // Atualizar cliente
     await ClienteModel.updateOne({ _id: id }, data);
 
-    return res.status(200).json({ cliente });
+    // Criar novo agendamento com informações atualizadas
+    const mensagem = `Olá ${data.name}, está quase na hora! Serviço: ${data.service} com ${data.barber} às ${data.time}.`;
+    if (
+      typeof data.phone === "string" &&
+      typeof data.date === "string" &&
+      typeof data.time === "string"
+    ) {
+      agendarMensagem(data.phone, data.date, data.time, mensagem);
+    } else {
+      throw new Error("Número de telefone inválido ou ausente.");
+    }
+
+    return res
+      .status(200)
+      .json({ cliente: { ...cliente.toObject(), ...data } });
   } catch (e: any) {
     Logger.error(`Erro no sistema: ${e.message}`);
     return res.status(500).json({ error: "Por favor, tente mais tarde!" });

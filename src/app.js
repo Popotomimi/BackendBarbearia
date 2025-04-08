@@ -14,10 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv").config();
 const express_1 = __importDefault(require("express"));
+const agendaScheduler_1 = require("./services/agendaScheduler");
 const config_1 = __importDefault(require("config"));
 const cors = require("cors");
 const manterServidorAtivo_1 = __importDefault(require("./utils/manterServidorAtivo"));
 const app = (0, express_1.default)();
+// Inicializar o agendador
+(0, agendaScheduler_1.inicializarAgendador)();
 // Adicione um ponto de log para verificação
 console.log("Aplicando middleware CORS");
 app.use(cors({

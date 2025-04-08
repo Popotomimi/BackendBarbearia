@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createCliente = createCliente;
+exports.getUsuariosDoDia = getUsuariosDoDia;
 exports.findClienteById = findClienteById;
 exports.getAllClientes = getAllClientes;
 exports.RemoveCliente = RemoveCliente;
@@ -66,6 +67,16 @@ function createCliente(req, res) {
                 .json({ message: "Todos os campos são obrigatórios!" });
         }
         try {
+            // Validar se a data e horário estão no futuro
+            const dataAtual = luxon_1.DateTime.now().setZone("America/Sao_Paulo");
+            const dataAgendada = luxon_1.DateTime.fromISO(`${date}T${time}`, {
+                zone: "America/Sao_Paulo",
+            });
+            if (!dataAgendada.isValid || dataAgendada <= dataAtual) {
+                return res
+                    .status(422)
+                    .json({ message: "A data e o horário devem ser no futuro!" });
+            }
             const data = req.body;
             const cliente = yield Clientes_1.ClienteModel.create(data);
             const mensagem = `Olá ${cliente.name}, está quase na hora! Serviço: ${cliente.service} com ${cliente.barber} às ${cliente.time}.`;
@@ -75,7 +86,7 @@ function createCliente(req, res) {
                 agendarMensagem(cliente.phone, cliente.date, cliente.time, mensagem);
             }
             else {
-                throw new Error("Número de telefone inválido ou ausente.");
+                throw new Error("Dados inválidos ou ausentes.");
             }
             return res.status(201).json(cliente);
         }
@@ -91,6 +102,25 @@ function createCliente(req, res) {
         }
     });
 }
+// Função para buscar clientes do dia
+function getUsuariosDoDia(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            // Obter a data atual no formato "YYYY-MM-DD"
+            const dataAtual = luxon_1.DateTime.now().setZone("America/Sao_Paulo").toISODate();
+            // Buscar todos os usuários do banco de dados
+            const todosUsuarios = yield Clientes_1.ClienteModel.find();
+            // Filtrar os usuários com a data atual
+            const usuariosDoDia = todosUsuarios.filter((usuario) => usuario.date === dataAtual);
+            // Retornar a resposta com os usuários filtrados
+            return res.status(200).json(usuariosDoDia);
+        }
+        catch (error) {
+            return res.status(500).json({ error: "Por favor, tente mais tarde!" });
+        }
+    });
+}
+// Função para buscar um cliente pelo ID
 function findClienteById(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -107,6 +137,7 @@ function findClienteById(req, res) {
         }
     });
 }
+// Função para buscar todos os clientes
 function getAllClientes(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -119,6 +150,17 @@ function getAllClientes(req, res) {
         }
     });
 }
+// Função para cancelar um agendamento
+function cancelarAgendamento(telefone) {
+    const jobs = schedule.scheduledJobs;
+    for (const jobName in jobs) {
+        if (jobName.includes(telefone)) {
+            console.log(`Cancelando agendamento para ${telefone}`);
+            jobs[jobName].cancel();
+        }
+    }
+}
+// Atualizar função RemoveCliente
 function RemoveCliente(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -127,8 +169,12 @@ function RemoveCliente(req, res) {
             if (!cliente) {
                 return res.status(404).json({ error: "O Cliente não existe!" });
             }
+            // Cancelar agendamento associado
+            if (typeof cliente.phone === "string") {
+                cancelarAgendamento(cliente.phone);
+            }
             yield cliente.deleteOne();
-            return res.status(200).json({ message: "Cliente removido som sucesso!" });
+            return res.status(200).json({ message: "Cliente removido com sucesso!" });
         }
         catch (e) {
             logger_1.default.error(`Erro no sistema: ${e.message}`);
@@ -136,6 +182,7 @@ function RemoveCliente(req, res) {
         }
     });
 }
+// Atualizar função updateCliente
 function updateCliente(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -145,8 +192,25 @@ function updateCliente(req, res) {
             if (!cliente) {
                 return res.status(404).json({ error: "O Cliente não existe!" });
             }
+            // Cancelar agendamento anterior
+            if (typeof cliente.phone === "string") {
+                cancelarAgendamento(cliente.phone);
+            }
+            // Atualizar cliente
             yield Clientes_1.ClienteModel.updateOne({ _id: id }, data);
-            return res.status(200).json({ cliente });
+            // Criar novo agendamento com informações atualizadas
+            const mensagem = `Olá ${data.name}, está quase na hora! Serviço: ${data.service} com ${data.barber} às ${data.time}.`;
+            if (typeof data.phone === "string" &&
+                typeof data.date === "string" &&
+                typeof data.time === "string") {
+                agendarMensagem(data.phone, data.date, data.time, mensagem);
+            }
+            else {
+                throw new Error("Número de telefone inválido ou ausente.");
+            }
+            return res
+                .status(200)
+                .json({ cliente: Object.assign(Object.assign({}, cliente.toObject()), data) });
         }
         catch (e) {
             logger_1.default.error(`Erro no sistema: ${e.message}`);
