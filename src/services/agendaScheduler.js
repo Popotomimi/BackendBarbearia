@@ -26,19 +26,15 @@ function inicializarAgendador() {
                 const dataAgendada = luxon_1.DateTime.fromISO(`${cliente.date}T${cliente.time}`, {
                     zone: "America/Sao_Paulo",
                 });
-                if (dataAgendada <= dataAtual.minus({ days: 1 })) {
-                    cliente.history.push({
-                        date: cliente.date,
-                        service: cliente.service,
-                        barber: cliente.barber,
-                    });
-                    yield cliente.save();
-                    yield Clientes_1.ClienteModel.findByIdAndDelete(cliente._id);
+                // Verifica se o cliente foi agendado para o dia atual
+                if (dataAgendada.toFormat("yyyy-MM-dd") ===
+                    dataAtual.toFormat("yyyy-MM-dd")) {
+                    yield Clientes_1.ClienteModel.findByIdAndDelete(cliente._id); // Apenas remove o cliente
                 }
             }
         }
         catch (error) {
-            logger_1.default.error(`Erro ao remover atendimentos antigos`);
+            logger_1.default.error(`Erro ao remover atendimentos do dia atual`);
         }
     }));
 }

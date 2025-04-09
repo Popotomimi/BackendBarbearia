@@ -10,13 +10,6 @@ const clienteSchema = new mongoose_1.Schema({
     duration: { type: Number },
     barber: { type: String },
     phone: { type: String },
-    history: [
-        {
-            date: { type: String },
-            service: { type: String },
-            barber: { type: String },
-        },
-    ],
 }, {
     timestamps: true,
 });

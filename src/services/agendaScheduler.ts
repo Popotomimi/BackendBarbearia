@@ -17,19 +17,16 @@ export function inicializarAgendador() {
           }
         );
 
-        if (dataAgendada <= dataAtual.minus({ days: 1 })) {
-          cliente.history.push({
-            date: cliente.date,
-            service: cliente.service,
-            barber: cliente.barber,
-          });
-          await cliente.save();
-
-          await ClienteModel.findByIdAndDelete(cliente._id);
+        // Verifica se o cliente foi agendado para o dia atual
+        if (
+          dataAgendada.toFormat("yyyy-MM-dd") ===
+          dataAtual.toFormat("yyyy-MM-dd")
+        ) {
+          await ClienteModel.findByIdAndDelete(cliente._id); // Apenas remove o cliente
         }
       }
     } catch (error) {
-      Logger.error(`Erro ao remover atendimentos antigos`);
+      Logger.error(`Erro ao remover atendimentos do dia atual`);
     }
   });
 }

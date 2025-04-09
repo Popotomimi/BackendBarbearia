@@ -1,37 +1,4 @@
-2025/04/08-16:39:11.171 6f8 Reusing MANIFEST C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2025/04/08-16:39:11.171 6f8 Recovering log #496
-2025/04/08-16:39:11.241 6f8 Reusing old log C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000496.log 
-2025/04/08-16:39:12.778 e58 Level-0 table #511: started
-2025/04/08-16:39:12.792 e58 Level-0 table #511: 288641 bytes OK
-2025/04/08-16:39:12.795 e58 Delete type=0 #496
-2025/04/08-16:39:12.795 e58 Manual compaction at level-0 from '\x00+\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00,\x00\x00\x00' @ 0 : 0; will stop at '\x00+\x00\x00\x05' @ 1718048 : 1
-2025/04/08-16:39:12.795 e58 Compacting 1@0 + 0@1 files
-2025/04/08-16:39:12.809 e58 Generated table #512@0: 6197 keys, 127075 bytes
-2025/04/08-16:39:12.809 e58 Compacted 1@0 + 0@1 files => 127075 bytes
-2025/04/08-16:39:12.812 e58 compacted to: files[ 0 1 10 0 0 0 0 ]
-2025/04/08-16:39:12.812 e58 Delete type=2 #511
-2025/04/08-16:39:12.812 e58 Manual compaction at level-0 from '\x00+\x00\x00\x05' @ 1718048 : 1 .. '\x00,\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/04/08-16:39:15.187 4b74 Compacting 1@1 + 10@2 files
-2025/04/08-16:39:15.270 4b74 Generated table #513@1: 49579 keys, 2210813 bytes
-2025/04/08-16:39:15.316 4b74 Generated table #514@1: 3311 keys, 2158523 bytes
-2025/04/08-16:39:15.360 4b74 Generated table #515@1: 2935 keys, 2161480 bytes
-2025/04/08-16:39:15.399 4b74 Generated table #516@1: 2561 keys, 2159418 bytes
-2025/04/08-16:39:15.450 4b74 Generated table #517@1: 11580 keys, 2170211 bytes
-2025/04/08-16:39:15.538 4b74 Generated table #518@1: 27838 keys, 2267687 bytes
-2025/04/08-16:39:15.612 4b74 Generated table #519@1: 23213 keys, 2221788 bytes
-2025/04/08-16:39:15.683 4b74 Generated table #520@1: 40289 keys, 2173316 bytes
-2025/04/08-16:39:15.813 4b74 Generated table #521@1: 105032 keys, 2255441 bytes
-2025/04/08-16:39:15.937 4b74 Generated table #522@1: 101789 keys, 2180254 bytes
-2025/04/08-16:39:15.937 4b74 Compacted 1@1 + 10@2 files => 21958931 bytes
-2025/04/08-16:39:15.940 4b74 compacted to: files[ 0 0 10 0 0 0 0 ]
-2025/04/08-16:39:15.940 4b74 Delete type=2 #499
-2025/04/08-16:39:15.940 4b74 Delete type=2 #500
-2025/04/08-16:39:15.940 4b74 Delete type=2 #501
-2025/04/08-16:39:15.940 4b74 Delete type=2 #502
-2025/04/08-16:39:15.940 4b74 Delete type=2 #503
-2025/04/08-16:39:15.940 4b74 Delete type=2 #504
-2025/04/08-16:39:15.940 4b74 Delete type=2 #505
-2025/04/08-16:39:15.940 4b74 Delete type=2 #506
-2025/04/08-16:39:15.940 4b74 Delete type=2 #507
-2025/04/08-16:39:15.940 4b74 Delete type=2 #508
-2025/04/08-16:39:15.940 4b74 Delete type=2 #512
+2025/04/08-21:03:42.210 1398 Reusing MANIFEST C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/04/08-21:03:42.211 1398 Recovering log #524
+2025/04/08-21:03:42.231 1398 Reusing old log C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000524.log 
+2025/04/08-21:03:44.062 1bbc Manual compaction at level-0 from '\x00-\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00.\x00\x00\x00' @ 0 : 0; will stop at (end)

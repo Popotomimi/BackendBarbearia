@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { ClienteModel } from "../models/Clientes";
+import { HistoryModel } from "../models/History";
 import Logger from "../../config/logger";
 const client = require("../../config/whatsapp.js");
 const schedule = require("node-schedule");
@@ -75,8 +76,32 @@ export async function createCliente(req: Request, res: Response) {
         .json({ message: "A data e o horário devem ser no futuro!" });
     }
 
-    const data = req.body;
-    const cliente = await ClienteModel.create(data);
+    // Verificar se já existe um histórico com o número de telefone fornecido
+    let historyExistente = await HistoryModel.findOne({ phone });
+
+    if (historyExistente) {
+      // Garante que amount nunca será null ou undefined
+      historyExistente.amount = (historyExistente.amount ?? 0) + 1; // Usa valor padrão 0 se undefined ou null
+      await historyExistente.save();
+    }
+
+    // Se o histórico não existe, criar um novo histórico e cliente
+    const cliente = await ClienteModel.create({
+      name,
+      date,
+      time,
+      service,
+      barber,
+      phone,
+    });
+
+    // Criar novo registro no History
+    await HistoryModel.create({
+      name: cliente.name,
+      phone: cliente.phone,
+      barber: cliente.barber,
+      amount: 1, // Começar com amount igual a 1
+    });
 
     const mensagem = `Olá ${cliente.name}, está quase na hora! Serviço: ${cliente.service} com ${cliente.barber} às ${cliente.time}.`;
     if (

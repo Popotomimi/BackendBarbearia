@@ -19,6 +19,7 @@ exports.getAllClientes = getAllClientes;
 exports.RemoveCliente = RemoveCliente;
 exports.updateCliente = updateCliente;
 const Clientes_1 = require("../models/Clientes");
+const History_1 = require("../models/History");
 const logger_1 = __importDefault(require("../../config/logger"));
 const client = require("../../config/whatsapp.js");
 const schedule = require("node-schedule");
@@ -60,6 +61,7 @@ function agendarMensagem(telefone, date, time, mensagem) {
 // Criar cliente
 function createCliente(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        var _a;
         const { name, date, time, service, barber, phone } = req.body;
         if (!name || !date || !time || !service || !barber || !phone) {
             return res
@@ -77,8 +79,29 @@ function createCliente(req, res) {
                     .status(422)
                     .json({ message: "A data e o horário devem ser no futuro!" });
             }
-            const data = req.body;
-            const cliente = yield Clientes_1.ClienteModel.create(data);
+            // Verificar se já existe um histórico com o número de telefone fornecido
+            let historyExistente = yield History_1.HistoryModel.findOne({ phone });
+            if (historyExistente) {
+                // Garante que amount nunca será null ou undefined
+                historyExistente.amount = ((_a = historyExistente.amount) !== null && _a !== void 0 ? _a : 0) + 1; // Usa valor padrão 0 se undefined ou null
+                yield historyExistente.save();
+            }
+            // Se o histórico não existe, criar um novo histórico e cliente
+            const cliente = yield Clientes_1.ClienteModel.create({
+                name,
+                date,
+                time,
+                service,
+                barber,
+                phone,
+            });
+            // Criar novo registro no History
+            yield History_1.HistoryModel.create({
+                name: cliente.name,
+                phone: cliente.phone,
+                barber: cliente.barber,
+                amount: 1, // Começar com amount igual a 1
+            });
             const mensagem = `Olá ${cliente.name}, está quase na hora! Serviço: ${cliente.service} com ${cliente.barber} às ${cliente.time}.`;
             if (typeof cliente.phone === "string" &&
                 typeof cliente.date === "string" &&
