@@ -76,16 +76,7 @@ export async function createCliente(req: Request, res: Response) {
         .json({ message: "A data e o horário devem ser no futuro!" });
     }
 
-    // Verificar se já existe um histórico com o número de telefone fornecido
-    let historyExistente = await HistoryModel.findOne({ phone });
-
-    if (historyExistente) {
-      // Garante que amount nunca será null ou undefined
-      historyExistente.amount = (historyExistente.amount ?? 0) + 1; // Usa valor padrão 0 se undefined ou null
-      await historyExistente.save();
-    }
-
-    // Se o histórico não existe, criar um novo histórico e cliente
+    // Criar o cliente sempre
     const cliente = await ClienteModel.create({
       name,
       date,
@@ -95,14 +86,24 @@ export async function createCliente(req: Request, res: Response) {
       phone,
     });
 
-    // Criar novo registro no History
-    await HistoryModel.create({
-      name: cliente.name,
-      phone: cliente.phone,
-      barber: cliente.barber,
-      amount: 1, // Começar com amount igual a 1
-    });
+    // Verificar se já existe um histórico com o número de telefone fornecido
+    let historyExistente = await HistoryModel.findOne({ phone });
 
+    if (historyExistente) {
+      // Incrementar o valor de amount
+      historyExistente.amount = (historyExistente.amount ?? 0) + 1;
+      await historyExistente.save();
+    } else {
+      // Criar novo registro no History
+      await HistoryModel.create({
+        name: cliente.name,
+        phone: cliente.phone,
+        barber: cliente.barber,
+        amount: 1, // Começar com amount igual a 1
+      });
+    }
+
+    // Agendar mensagem
     const mensagem = `Olá ${cliente.name}, está quase na hora! Serviço: ${cliente.service} com ${cliente.barber} às ${cliente.time}.`;
     if (
       typeof cliente.phone === "string" &&
