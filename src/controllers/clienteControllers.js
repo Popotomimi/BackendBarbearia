@@ -79,7 +79,7 @@ function createCliente(req, res) {
                     .status(422)
                     .json({ message: "A data e o horário devem ser no futuro!" });
             }
-            // Criar o cliente sempre
+            // Criar o cliente
             const cliente = yield Clientes_1.ClienteModel.create({
                 name,
                 date,
@@ -93,6 +93,10 @@ function createCliente(req, res) {
             if (historyExistente) {
                 // Incrementar o valor de amount
                 historyExistente.amount = ((_a = historyExistente.amount) !== null && _a !== void 0 ? _a : 0) + 1;
+                // Adicionar a nova data, serviço e barbeiro aos arrays
+                historyExistente.dates.push(dataAgendada.toJSDate());
+                historyExistente.services.push(service);
+                historyExistente.barbers.push(barber);
                 yield historyExistente.save();
             }
             else {
@@ -100,8 +104,10 @@ function createCliente(req, res) {
                 yield History_1.HistoryModel.create({
                     name: cliente.name,
                     phone: cliente.phone,
-                    barber: cliente.barber,
-                    amount: 1, // Começar com amount igual a 1
+                    amount: 1,
+                    dates: [dataAgendada.toJSDate()],
+                    services: [service],
+                    barbers: [barber],
                 });
             }
             // Agendar mensagem

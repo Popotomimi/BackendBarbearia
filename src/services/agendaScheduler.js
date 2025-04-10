@@ -18,23 +18,25 @@ const logger_1 = __importDefault(require("../../config/logger"));
 const schedule = require("node-schedule");
 const luxon_1 = require("luxon");
 function inicializarAgendador() {
-    schedule.scheduleJob("0 0 * * *", () => __awaiter(this, void 0, void 0, function* () {
+    // Executa o job a cada hora para verificar
+    schedule.scheduleJob("0 * * * *", () => __awaiter(this, void 0, void 0, function* () {
         try {
-            const dataAtual = luxon_1.DateTime.now().setZone("America/Sao_Paulo");
+            const dataAtual = luxon_1.DateTime.now()
+                .setZone("America/Sao_Paulo")
+                .startOf("day");
             const clientes = yield Clientes_1.ClienteModel.find();
             for (const cliente of clientes) {
-                const dataAgendada = luxon_1.DateTime.fromISO(`${cliente.date}T${cliente.time}`, {
+                const dataAgendada = luxon_1.DateTime.fromISO(`${cliente.date}`, {
                     zone: "America/Sao_Paulo",
-                });
-                // Verifica se o cliente foi agendado para o dia atual
-                if (dataAgendada.toFormat("yyyy-MM-dd") ===
-                    dataAtual.toFormat("yyyy-MM-dd")) {
-                    yield Clientes_1.ClienteModel.findByIdAndDelete(cliente._id); // Apenas remove o cliente
+                }).startOf("day");
+                // Verifica se a data atual já passou do dia agendado
+                if (dataAtual > dataAgendada) {
+                    yield Clientes_1.ClienteModel.findByIdAndDelete(cliente._id); // Remove o cliente
                 }
             }
         }
         catch (error) {
-            logger_1.default.error(`Erro ao remover atendimentos do dia atual`);
+            logger_1.default.error(`Erro ao remover atendimentos fora da data agendada: ${error}`);
         }
     }));
 }

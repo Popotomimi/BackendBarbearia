@@ -6,6 +6,9 @@ const historySchema = new Schema(
     amount: { type: Number },
     barber: { type: String },
     phone: { type: String },
+    dates: [{ type: Date }],
+    services: [{ type: String }],
+    barbers: [{ type: String }],
   },
   {
     timestamps: true,

@@ -76,7 +76,7 @@ export async function createCliente(req: Request, res: Response) {
         .json({ message: "A data e o horário devem ser no futuro!" });
     }
 
-    // Criar o cliente sempre
+    // Criar o cliente
     const cliente = await ClienteModel.create({
       name,
       date,
@@ -92,14 +92,22 @@ export async function createCliente(req: Request, res: Response) {
     if (historyExistente) {
       // Incrementar o valor de amount
       historyExistente.amount = (historyExistente.amount ?? 0) + 1;
+
+      // Adicionar a nova data, serviço e barbeiro aos arrays
+      historyExistente.dates.push(dataAgendada.toJSDate());
+      historyExistente.services.push(service);
+      historyExistente.barbers.push(barber);
+
       await historyExistente.save();
     } else {
       // Criar novo registro no History
       await HistoryModel.create({
         name: cliente.name,
         phone: cliente.phone,
-        barber: cliente.barber,
-        amount: 1, // Começar com amount igual a 1
+        amount: 1,
+        dates: [dataAgendada.toJSDate()],
+        services: [service],
+        barbers: [barber],
       });
     }
 
