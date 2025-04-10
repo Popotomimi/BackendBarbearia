@@ -1,12 +1,12 @@
 import { Router, Request, Response } from "express";
 import {
   createCliente,
-  findClienteById,
   getAllClientes,
   getUsuariosDoDia,
   RemoveCliente,
   updateCliente,
 } from "./controllers/clienteControllers";
+import { getAllHistory, globalSearch } from "./controllers/historyControllers";
 
 const router = Router();
 
@@ -19,14 +19,19 @@ router.get("/cliente/agendadodia", (req: Request, res: Response) => {
   getUsuariosDoDia(req, res);
 });
 
+// Rota para buscar todos os historicos
+router.get("/cliente/historico/all", (req: Request, res: Response) => {
+  getAllHistory(req, res);
+});
+
+// Rota de pesquisa global
+router.get("/cliente/historico/search", (req: Request, res: Response) => {
+  globalSearch(req, res);
+});
+
 // Rota para criar cliente
 router.post("/cliente", (req: Request, res: Response) => {
   createCliente(req, res);
-});
-
-// Rota para buscar cliente por ID
-router.get("/cliente/:id", (req: Request, res: Response) => {
-  findClienteById(req, res);
 });
 
 // Rota para buscar todos os clientes

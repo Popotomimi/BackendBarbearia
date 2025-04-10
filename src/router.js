@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const clienteControllers_1 = require("./controllers/clienteControllers");
+const historyControllers_1 = require("./controllers/historyControllers");
 const router = (0, express_1.Router)();
 router.get("/test", (req, res) => {
     res.status(200).send("API Working!");
@@ -10,13 +11,17 @@ router.get("/test", (req, res) => {
 router.get("/cliente/agendadodia", (req, res) => {
     (0, clienteControllers_1.getUsuariosDoDia)(req, res);
 });
+// Rota para buscar todos os historicos
+router.get("/cliente/historico/all", (req, res) => {
+    (0, historyControllers_1.getAllHistory)(req, res);
+});
+// Rota de pesquisa global
+router.get("/cliente/historico/search", (req, res) => {
+    (0, historyControllers_1.globalSearch)(req, res);
+});
 // Rota para criar cliente
 router.post("/cliente", (req, res) => {
     (0, clienteControllers_1.createCliente)(req, res);
-});
-// Rota para buscar cliente por ID
-router.get("/cliente/:id", (req, res) => {
-    (0, clienteControllers_1.findClienteById)(req, res);
 });
 // Rota para buscar todos os clientes
 router.get("/cliente", (req, res) => {

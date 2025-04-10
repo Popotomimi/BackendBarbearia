@@ -279,3 +279,4 @@
 2025-04-08 16:31:38:3138 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "agendadodia" (type string) at path "_id" for model "Cliente"[39m
 2025-04-08 16:38:25:3825 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "agendadodia" (type string) at path "_id" for model "Cliente"[39m
 2025-04-08 16:39:28:3928 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "agendadodia" (type string) at path "_id" for model "Cliente"[39m
+2025-04-09 20:58:21:5821 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "historico" (type string) at path "_id" for model "Cliente"[39m
