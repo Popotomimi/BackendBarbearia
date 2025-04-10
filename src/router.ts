@@ -6,7 +6,11 @@ import {
   RemoveCliente,
   updateCliente,
 } from "./controllers/clienteControllers";
-import { getAllHistory, globalSearch } from "./controllers/historyControllers";
+import {
+  getAllHistory,
+  getHistoryById,
+  globalSearch,
+} from "./controllers/historyControllers";
 
 const router = Router();
 
@@ -47,6 +51,11 @@ router.delete("/cliente/:id", (req: Request, res: Response) => {
 // Rota para atualizar cliente
 router.patch("/cliente/:id", (req: Request, res: Response) => {
   updateCliente(req, res);
+});
+
+// Rota para buscar histórico por ID
+router.get("/cliente/historico/:id", (req: Request, res: Response) => {
+  getHistoryById(req, res);
 });
 
 export default router;

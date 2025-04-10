@@ -41,3 +41,27 @@ export async function globalSearch(req: Request, res: Response) {
     return res.status(500).json({ error: "Por favor, tente mais tarde!" });
   }
 }
+
+// Função para buscar com base no ID
+export async function getHistoryById(req: Request, res: Response) {
+  const { id } = req.params; // Capturar o ID dos parâmetros da URL
+
+  try {
+    if (!id) {
+      return res.status(400).json({ error: "O ID do histórico é obrigatório." });
+    }
+
+    const history = await HistoryModel.findById(id); // Buscar o registro pelo ID
+
+    if (!history) {
+      return res
+        .status(404)
+        .json({ error: "Histórico não encontrado para o ID fornecido." });
+    }
+
+    return res.status(200).json(history); // Retornar os dados do histórico
+  } catch (e: any) {
+    Logger.error(`Erro ao buscar histórico pelo ID: ${e.message}`);
+    return res.status(500).json({ error: "Erro interno do servidor. Por favor, tente mais tarde!" });
+  }
+}

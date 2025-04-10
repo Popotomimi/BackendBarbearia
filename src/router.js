@@ -35,4 +35,8 @@ router.delete("/cliente/:id", (req, res) => {
 router.patch("/cliente/:id", (req, res) => {
     (0, clienteControllers_1.updateCliente)(req, res);
 });
+// Rota para buscar histórico por ID
+router.get("/cliente/historico/:id", (req, res) => {
+    (0, historyControllers_1.getHistoryById)(req, res);
+});
 exports.default = router;

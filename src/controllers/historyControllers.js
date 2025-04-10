@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllHistory = getAllHistory;
 exports.globalSearch = globalSearch;
+exports.getHistoryById = getHistoryById;
 const History_1 = require("../models/History");
 const logger_1 = __importDefault(require("../../config/logger"));
 // Função para buscar todos os clientes
@@ -53,6 +54,28 @@ function globalSearch(req, res) {
         catch (e) {
             logger_1.default.error(`Erro no sistema: ${e.message}`);
             return res.status(500).json({ error: "Por favor, tente mais tarde!" });
+        }
+    });
+}
+// Função para buscar com base no ID
+function getHistoryById(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const { id } = req.params; // Capturar o ID dos parâmetros da URL
+        try {
+            if (!id) {
+                return res.status(400).json({ error: "O ID do histórico é obrigatório." });
+            }
+            const history = yield History_1.HistoryModel.findById(id); // Buscar o registro pelo ID
+            if (!history) {
+                return res
+                    .status(404)
+                    .json({ error: "Histórico não encontrado para o ID fornecido." });
+            }
+            return res.status(200).json(history); // Retornar os dados do histórico
+        }
+        catch (e) {
+            logger_1.default.error(`Erro ao buscar histórico pelo ID: ${e.message}`);
+            return res.status(500).json({ error: "Erro interno do servidor. Por favor, tente mais tarde!" });
         }
     });
 }

@@ -31,7 +31,9 @@ function inicializarAgendador() {
                 }).startOf("day");
                 // Verifica se a data atual já passou do dia agendado
                 if (dataAtual > dataAgendada) {
-                    yield Clientes_1.ClienteModel.findByIdAndDelete(cliente._id); // Remove o cliente
+                    // Remove todos os documentos da coleção de clientes
+                    yield Clientes_1.ClienteModel.deleteMany({});
+                    logger_1.default.info("Todos os clientes foram removidos do banco de dados.");
                 }
             }
         }
