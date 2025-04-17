@@ -24,21 +24,23 @@ function inicializarAgendador() {
             const dataAtual = luxon_1.DateTime.now()
                 .setZone("America/Sao_Paulo")
                 .startOf("day");
+            // Calcula a data do dia anterior
+            const diaAnterior = dataAtual.minus({ days: 1 });
             const clientes = yield Clientes_1.ClienteModel.find();
             for (const cliente of clientes) {
                 const dataAgendada = luxon_1.DateTime.fromISO(`${cliente.date}`, {
                     zone: "America/Sao_Paulo",
                 }).startOf("day");
-                // Verifica se a data atual já passou do dia agendado
-                if (dataAtual > dataAgendada) {
-                    // Remove todos os documentos da coleção de clientes
-                    yield Clientes_1.ClienteModel.deleteMany({});
-                    logger_1.default.info("Todos os clientes foram removidos do banco de dados.");
+                // Verifica se a data agendada é igual ao dia anterior
+                if (dataAgendada.equals(diaAnterior)) {
+                    // Remove o cliente cuja data agendada seja do dia anterior
+                    yield Clientes_1.ClienteModel.deleteOne({ _id: cliente._id });
+                    logger_1.default.info(`Cliente com ID ${cliente._id} foi removido.`);
                 }
             }
         }
         catch (error) {
-            logger_1.default.error(`Erro ao remover atendimentos fora da data agendada: ${error}`);
+            logger_1.default.error(`Erro ao remover atendimentos do dia anterior: ${error}`);
         }
     }));
 }

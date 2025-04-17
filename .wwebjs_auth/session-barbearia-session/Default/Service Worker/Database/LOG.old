@@ -1,3 +1,2 @@
-2025/04/09-21:36:15.290 2ec Reusing MANIFEST C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\Service Worker\Database/MANIFEST-000001
-2025/04/09-21:36:15.291 2ec Recovering log #3
-2025/04/09-21:36:15.291 2ec Reusing old log C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\Service Worker\Database/000003.log 
+2025/04/17-16:31:05.225 21cc Creating DB C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\Service Worker\Database since it was missing.
+2025/04/17-16:31:05.246 21cc Reusing MANIFEST C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\Service Worker\Database/MANIFEST-000001

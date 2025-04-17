@@ -1,43 +1,13 @@
-2025/04/09-21:36:15.816 1db0 Reusing MANIFEST C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2025/04/09-21:36:15.816 1db0 Recovering log #621
-2025/04/09-21:36:15.925 1db0 Reusing old log C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000621.log 
-2025/04/09-21:36:17.456 cbc Level-0 table #635: started
-2025/04/09-21:36:17.478 cbc Level-0 table #635: 808560 bytes OK
-2025/04/09-21:36:17.481 cbc Delete type=0 #621
-2025/04/09-21:36:17.482 cbc Manual compaction at level-0 from '\x007\x00\x00\x00' @ 72057594037927935 : 1 .. '\x008\x00\x00\x00' @ 0 : 0; will stop at '\x007\x00\x00\x05' @ 1834745 : 1
-2025/04/09-21:36:17.482 cbc Compacting 1@0 + 1@1 files
-2025/04/09-21:36:17.520 cbc Generated table #636@0: 13153 keys, 292151 bytes
-2025/04/09-21:36:17.535 cbc Generated table #637@0: 2 keys, 201 bytes
-2025/04/09-21:36:17.535 cbc Compacted 1@0 + 1@1 files => 292352 bytes
-2025/04/09-21:36:17.538 cbc compacted to: files[ 0 2 14 0 0 0 0 ]
-2025/04/09-21:36:17.538 cbc Delete type=2 #635
-2025/04/09-21:36:17.539 cbc Manual compaction at level-0 from '\x007\x00\x00\x05' @ 1834745 : 1 .. '\x008\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/04/09-21:36:19.942 cbc Compacting 1@1 + 13@2 files
-2025/04/09-21:36:20.036 cbc Generated table #638@1: 58937 keys, 2223886 bytes
-2025/04/09-21:36:20.084 cbc Generated table #639@1: 3149 keys, 2156797 bytes
-2025/04/09-21:36:20.130 cbc Generated table #640@1: 3093 keys, 2162073 bytes
-2025/04/09-21:36:20.179 cbc Generated table #641@1: 2499 keys, 2162562 bytes
-2025/04/09-21:36:20.230 cbc Generated table #642@1: 8545 keys, 2162802 bytes
-2025/04/09-21:36:20.335 cbc Generated table #643@1: 29054 keys, 2261660 bytes
-2025/04/09-21:36:20.420 cbc Generated table #644@1: 24770 keys, 2237109 bytes
-2025/04/09-21:36:20.492 cbc Generated table #645@1: 27911 keys, 2155831 bytes
-2025/04/09-21:36:20.642 cbc Generated table #646@1: 106693 keys, 2258877 bytes
-2025/04/09-21:36:20.812 cbc Generated table #647@1: 105361 keys, 2257335 bytes
-2025/04/09-21:36:20.828 cbc Generated table #648@1: 8581 keys, 187507 bytes
-2025/04/09-21:36:20.828 cbc Compacted 1@1 + 13@2 files => 22226439 bytes
-2025/04/09-21:36:20.831 cbc compacted to: files[ 0 1 12 0 0 0 0 ]
-2025/04/09-21:36:20.831 cbc Delete type=2 #590
-2025/04/09-21:36:20.831 cbc Delete type=2 #591
-2025/04/09-21:36:20.831 cbc Delete type=2 #592
-2025/04/09-21:36:20.831 cbc Delete type=2 #606
-2025/04/09-21:36:20.831 cbc Delete type=2 #619
-2025/04/09-21:36:20.831 cbc Delete type=2 #624
-2025/04/09-21:36:20.831 cbc Delete type=2 #625
-2025/04/09-21:36:20.831 cbc Delete type=2 #626
-2025/04/09-21:36:20.831 cbc Delete type=2 #627
-2025/04/09-21:36:20.832 cbc Delete type=2 #628
-2025/04/09-21:36:20.832 cbc Delete type=2 #629
-2025/04/09-21:36:20.832 cbc Delete type=2 #630
-2025/04/09-21:36:20.832 cbc Delete type=2 #631
-2025/04/09-21:36:20.832 cbc Delete type=2 #632
-2025/04/09-21:36:20.832 cbc Delete type=2 #636
+2025/04/17-16:31:05.139 21cc Reusing MANIFEST C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/04/17-16:31:05.140 21cc Recovering log #794
+2025/04/17-16:31:05.159 21cc Reusing old log C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000794.log 
+2025/04/17-16:31:06.303 343c Level-0 table #800: started
+2025/04/17-16:31:06.310 343c Level-0 table #800: 106192 bytes OK
+2025/04/17-16:31:06.313 343c Delete type=0 #794
+2025/04/17-16:31:06.315 343c Manual compaction at level-0 from '\x00\x1b\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1c\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/04/17-16:31:08.893 934 Compacting 1@1 + 1@2 files
+2025/04/17-16:31:08.934 934 Generated table #801@1: 16772 keys, 641219 bytes
+2025/04/17-16:31:08.934 934 Compacted 1@1 + 1@2 files => 641219 bytes
+2025/04/17-16:31:08.937 934 compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/04/17-16:31:08.937 934 Delete type=2 #797
+2025/04/17-16:31:08.937 934 Delete type=2 #800

@@ -10,6 +10,10 @@ export function inicializarAgendador() {
       const dataAtual = DateTime.now()
         .setZone("America/Sao_Paulo")
         .startOf("day");
+
+      // Calcula a data do dia anterior
+      const diaAnterior = dataAtual.minus({ days: 1 });
+
       const clientes = await ClienteModel.find();
 
       for (const cliente of clientes) {
@@ -17,17 +21,15 @@ export function inicializarAgendador() {
           zone: "America/Sao_Paulo",
         }).startOf("day");
 
-        // Verifica se a data atual já passou do dia agendado
-        if (dataAtual > dataAgendada) {
-          // Remove todos os documentos da coleção de clientes
-          await ClienteModel.deleteMany({});
-          Logger.info("Todos os clientes foram removidos do banco de dados.");
+        // Verifica se a data agendada é igual ao dia anterior
+        if (dataAgendada.equals(diaAnterior)) {
+          // Remove o cliente cuja data agendada seja do dia anterior
+          await ClienteModel.deleteOne({ _id: cliente._id });
+          Logger.info(`Cliente com ID ${cliente._id} foi removido.`);
         }
       }
     } catch (error) {
-      Logger.error(
-        `Erro ao remover atendimentos fora da data agendada: ${error}`
-      );
+      Logger.error(`Erro ao remover atendimentos do dia anterior: ${error}`);
     }
   });
 }

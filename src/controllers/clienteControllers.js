@@ -58,6 +58,33 @@ function agendarMensagem(telefone, date, time, mensagem) {
         enviarMensagem(telefone, mensagem);
     });
 }
+// Função para enviar mensagem ao barbeiro
+function enviarMensagemBarbeiro(barber, cliente) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            // Definir o número do barbeiro com base no nome
+            let telefoneBarbeiro = "";
+            if (barber === "Gui") {
+                telefoneBarbeiro = "+5511985465474";
+            }
+            else if (barber === "Gabriel") {
+                telefoneBarbeiro = "+5511976560378";
+            }
+            else {
+                console.error("Barbeiro não encontrado!");
+                return;
+            }
+            // Criar a mensagem com as informações do agendamento
+            const mensagem = `Novo agendamento!\nCliente: ${cliente.name}\nServiço: ${cliente.service}\nBarbeiro: ${cliente.barber}\nData: ${cliente.date}\nHorário: ${cliente.time}\nTelefone do cliente: ${cliente.phone}`;
+            // Enviar a mensagem para o barbeiro
+            const numeroFormatado = telefoneBarbeiro.replace("+", "");
+            yield client.sendMessage(`${numeroFormatado}@c.us`, mensagem);
+        }
+        catch (error) {
+            logger_1.default.error(`Erro ao enviar mensagem para o barbeiro ${barber}: ${error.message}`);
+        }
+    });
+}
 // Criar cliente
 function createCliente(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -120,6 +147,7 @@ function createCliente(req, res) {
             else {
                 throw new Error("Dados inválidos ou ausentes.");
             }
+            yield enviarMensagemBarbeiro(barber, cliente);
             return res.status(201).json(cliente);
         }
         catch (e) {
