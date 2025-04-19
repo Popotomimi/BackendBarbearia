@@ -8,6 +8,7 @@ const historySchema = new mongoose_1.Schema({
     barber: { type: String },
     phone: { type: String },
     dates: [{ type: Date }],
+    times: [{ type: String }],
     services: [{ type: String }],
     barbers: [{ type: String }],
 }, {

@@ -127,6 +127,7 @@ export async function createCliente(req: Request, res: Response) {
       historyExistente.dates.push(dataAgendada.toJSDate());
       historyExistente.services.push(service);
       historyExistente.barbers.push(barber);
+      historyExistente.times.push(time);
 
       await historyExistente.save();
     } else {
@@ -136,6 +137,7 @@ export async function createCliente(req: Request, res: Response) {
         phone: cliente.phone,
         amount: 1,
         dates: [dataAgendada.toJSDate()],
+        times: [time],
         services: [service],
         barbers: [barber],
       });

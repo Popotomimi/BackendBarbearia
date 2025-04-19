@@ -30,6 +30,36 @@ client.on("disconnected", (reason) => {
   client.initialize(); // Reinicializa o cliente em caso de desconexão
 });
 
+// Adicionar funcionalidade de mensagens automáticas relacionadas a agendamentos
+client.on("message", (message) => {
+  if (message.body.toLowerCase().includes("agendamento")) {
+    // Determina a saudação com base no horário
+    const horaAtual = new Date().getHours();
+    let saudacao = "Bom dia";
+    if (horaAtual >= 12 && horaAtual < 18) {
+      saudacao = "Boa tarde";
+    } else if (horaAtual >= 18) {
+      saudacao = "Boa noite";
+    }
+
+    // Envia a mensagem inicial
+    message.reply(
+      `${saudacao}! Como posso te ajudar?\n\nDigite:\n1 - Para fazer um agendamento\n2 - Para cancelar um agendamento`
+    );
+  }
+
+  // Trata as respostas "1" ou "2"
+  if (message.body === "1") {
+    message.reply(
+      "Aqui está o link para você fazer o agendamento: https://meushorarios.netlify.app/"
+    );
+  } else if (message.body === "2") {
+    message.reply(
+      "Por favor, entre em contato diretamente com nossos barbeiros para solicitar o cancelamento:\n- Barbeiro Gui: +55 11 98546-5474\n- Barbeiro Gabriel: +55 11 97656-0378"
+    );
+  }
+});
+
 // Inicializar o cliente WhatsApp
 client.initialize();
 

@@ -1,13 +1,11 @@
-2025/04/17-16:31:05.139 21cc Reusing MANIFEST C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2025/04/17-16:31:05.140 21cc Recovering log #794
-2025/04/17-16:31:05.159 21cc Reusing old log C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000794.log 
-2025/04/17-16:31:06.303 343c Level-0 table #800: started
-2025/04/17-16:31:06.310 343c Level-0 table #800: 106192 bytes OK
-2025/04/17-16:31:06.313 343c Delete type=0 #794
-2025/04/17-16:31:06.315 343c Manual compaction at level-0 from '\x00\x1b\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1c\x00\x00\x00' @ 0 : 0; will stop at (end)
-2025/04/17-16:31:08.893 934 Compacting 1@1 + 1@2 files
-2025/04/17-16:31:08.934 934 Generated table #801@1: 16772 keys, 641219 bytes
-2025/04/17-16:31:08.934 934 Compacted 1@1 + 1@2 files => 641219 bytes
-2025/04/17-16:31:08.937 934 compacted to: files[ 0 0 1 0 0 0 0 ]
-2025/04/17-16:31:08.937 934 Delete type=2 #797
-2025/04/17-16:31:08.937 934 Delete type=2 #800
+2025/04/17-16:46:09.568 53d8 Reusing MANIFEST C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/04/17-16:46:09.568 53d8 Recovering log #799
+2025/04/17-16:46:09.583 53d8 Reusing old log C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000799.log 
+2025/04/17-16:46:11.354 53d8 Level-0 table #804: started
+2025/04/17-16:46:11.363 53d8 Level-0 table #804: 111245 bytes OK
+2025/04/17-16:46:11.366 53d8 Delete type=0 #799
+2025/04/17-16:46:11.367 53d8 Manual compaction at level-0 from '\x00\x1c\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1d\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/04/17-16:46:13.854 2884 Compacting 1@1 + 1@2 files
+2025/04/17-16:46:13.886 2884 Generated table #805@1: 17889 keys, 680525 bytes
+2025/04/17-16:46:13.886 2884 Compacted 1@1 + 1@2 files => 680525 bytes
+2025/04/17-16:46:13.888 2884 compacted to: files[ 0 0 1 0 0 0 0 ]

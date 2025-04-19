@@ -124,6 +124,7 @@ function createCliente(req, res) {
                 historyExistente.dates.push(dataAgendada.toJSDate());
                 historyExistente.services.push(service);
                 historyExistente.barbers.push(barber);
+                historyExistente.times.push(time);
                 yield historyExistente.save();
             }
             else {
@@ -133,6 +134,7 @@ function createCliente(req, res) {
                     phone: cliente.phone,
                     amount: 1,
                     dates: [dataAgendada.toJSDate()],
+                    times: [time],
                     services: [service],
                     barbers: [barber],
                 });
