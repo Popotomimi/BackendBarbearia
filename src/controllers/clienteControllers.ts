@@ -65,6 +65,8 @@ async function enviarMensagemBarbeiro(
       telefoneBarbeiro = "+5511985465474";
     } else if (barber === "Gabriel") {
       telefoneBarbeiro = "+5511976560378";
+    } else if (barber === "Buguinha") {
+      telefoneBarbeiro = "+5511913370291";
     } else {
       console.error("Barbeiro não encontrado!");
       return;
