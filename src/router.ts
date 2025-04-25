@@ -11,9 +11,14 @@ import {
   getHistoryById,
   globalSearch,
 } from "./controllers/historyControllers";
+import {
+  createBloqueio,
+  getAllBloqueios,
+} from "./controllers/bloqueioControllers";
 
 const router = Router();
 
+// Manter SErvidor online
 router.get("/test", (req: Request, res: Response) => {
   res.status(200).send("API Working!");
 });
@@ -41,6 +46,16 @@ router.post("/cliente", (req: Request, res: Response) => {
 // Rota para buscar todos os clientes
 router.get("/cliente", (req: Request, res: Response) => {
   getAllClientes(req, res);
+});
+
+// Rota para buscar bloqueios
+router.get("/cliente/bloqueios", (req: Request, res: Response) => {
+  getAllBloqueios(req, res);
+});
+
+// Rota para Adicionar bloqueios
+router.post("/cliente/bloqueios", (req: Request, res: Response) => {
+  createBloqueio(req, res);
 });
 
 // Rota para remover cliente

@@ -3,7 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const clienteControllers_1 = require("./controllers/clienteControllers");
 const historyControllers_1 = require("./controllers/historyControllers");
+const bloqueioControllers_1 = require("./controllers/bloqueioControllers");
 const router = (0, express_1.Router)();
+// Manter SErvidor online
 router.get("/test", (req, res) => {
     res.status(200).send("API Working!");
 });
@@ -26,6 +28,14 @@ router.post("/cliente", (req, res) => {
 // Rota para buscar todos os clientes
 router.get("/cliente", (req, res) => {
     (0, clienteControllers_1.getAllClientes)(req, res);
+});
+// Rota para buscar bloqueios
+router.get("/cliente/bloqueios", (req, res) => {
+    (0, bloqueioControllers_1.getAllBloqueios)(req, res);
+});
+// Rota para Adicionar bloqueios
+router.post("/cliente/bloqueios", (req, res) => {
+    (0, bloqueioControllers_1.createBloqueio)(req, res);
 });
 // Rota para remover cliente
 router.delete("/cliente/:id", (req, res) => {
