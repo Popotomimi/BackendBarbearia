@@ -4,7 +4,8 @@ exports.Bloqueio = void 0;
 const mongoose_1 = require("mongoose");
 const bloquioSchema = new mongoose_1.Schema({
     barber: { type: String },
-    date: { type: String },
+    startDate: { type: String },
+    endDate: { type: String },
     startTime: { type: String },
     endTime: { type: String },
     motivo: { type: String },

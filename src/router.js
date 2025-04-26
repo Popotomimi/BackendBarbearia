@@ -37,6 +37,10 @@ router.get("/cliente/bloqueios", (req, res) => {
 router.post("/cliente/bloqueios", (req, res) => {
     (0, bloqueioControllers_1.createBloqueio)(req, res);
 });
+// Rota para remover bloqueios
+router.delete("/cliente/bloqueios/:id", (req, res) => {
+    (0, bloqueioControllers_1.deleteBloqueio)(req, res);
+});
 // Rota para remover cliente
 router.delete("/cliente/:id", (req, res) => {
     (0, clienteControllers_1.RemoveCliente)(req, res);

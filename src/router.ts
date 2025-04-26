@@ -13,6 +13,7 @@ import {
 } from "./controllers/historyControllers";
 import {
   createBloqueio,
+  deleteBloqueio,
   getAllBloqueios,
 } from "./controllers/bloqueioControllers";
 
@@ -56,6 +57,11 @@ router.get("/cliente/bloqueios", (req: Request, res: Response) => {
 // Rota para Adicionar bloqueios
 router.post("/cliente/bloqueios", (req: Request, res: Response) => {
   createBloqueio(req, res);
+});
+
+// Rota para remover bloqueios
+router.delete("/cliente/bloqueios/:id", (req: Request, res: Response) => {
+  deleteBloqueio(req, res);
 });
 
 // Rota para remover cliente

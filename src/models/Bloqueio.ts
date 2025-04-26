@@ -3,7 +3,8 @@ import { model, Schema } from "mongoose";
 const bloquioSchema = new Schema(
   {
     barber: { type: String },
-    date: { type: String },
+    startDate: { type: String },
+    endDate: { type: String },
     startTime: { type: String },
     endTime: { type: String },
     motivo: { type: String },

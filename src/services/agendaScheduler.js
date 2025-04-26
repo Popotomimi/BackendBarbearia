@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.inicializarAgendador = inicializarAgendador;
 const Clientes_1 = require("../models/Clientes");
+const Bloqueio_1 = require("../models/Bloqueio");
 const logger_1 = __importDefault(require("../../config/logger"));
 const schedule = require("node-schedule");
 const luxon_1 = require("luxon");
@@ -24,23 +25,36 @@ function inicializarAgendador() {
             const dataAtual = luxon_1.DateTime.now()
                 .setZone("America/Sao_Paulo")
                 .startOf("day");
-            // Calcula a data do dia anterior
+            // 1. Remover clientes cuja data agendada já passou
             const diaAnterior = dataAtual.minus({ days: 1 });
             const clientes = yield Clientes_1.ClienteModel.find();
             for (const cliente of clientes) {
                 const dataAgendada = luxon_1.DateTime.fromISO(`${cliente.date}`, {
                     zone: "America/Sao_Paulo",
                 }).startOf("day");
-                // Verifica se a data agendada é igual ao dia anterior
                 if (dataAgendada.equals(diaAnterior)) {
-                    // Remove o cliente cuja data agendada seja do dia anterior
                     yield Clientes_1.ClienteModel.deleteOne({ _id: cliente._id });
                     logger_1.default.info(`Cliente com ID ${cliente._id} foi removido.`);
                 }
             }
+            // 2. Remover bloqueios cuja data já passou
+            const bloqueios = yield Bloqueio_1.Bloqueio.find();
+            for (const bloqueio of bloqueios) {
+                const dataFinal = bloqueio.endDate
+                    ? luxon_1.DateTime.fromISO(`${bloqueio.endDate}`, {
+                        zone: "America/Sao_Paulo",
+                    }).startOf("day")
+                    : luxon_1.DateTime.fromISO(`${bloqueio.startDate}`, {
+                        zone: "America/Sao_Paulo",
+                    }).startOf("day");
+                if (dataFinal < dataAtual) {
+                    yield Bloqueio_1.Bloqueio.deleteOne({ _id: bloqueio._id });
+                    logger_1.default.info(`Bloqueio com ID ${bloqueio._id} foi removido.`);
+                }
+            }
         }
         catch (error) {
-            logger_1.default.error(`Erro ao remover atendimentos do dia anterior: ${error}`);
+            logger_1.default.error(`Erro ao executar o agendador: ${error}`);
         }
     }));
 }

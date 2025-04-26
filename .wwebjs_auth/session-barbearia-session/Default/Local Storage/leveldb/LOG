@@ -1,5 +1,3 @@
-2025/04/25-19:06:59.633 4d00 Reusing MANIFEST C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\Local Storage\leveldb/MANIFEST-000001
-2025/04/25-19:06:59.634 4d00 Recovering log #14
-2025/04/25-19:06:59.634 4d00 Level-0 table #17: started
-2025/04/25-19:06:59.645 4d00 Level-0 table #17: 13902 bytes OK
-2025/04/25-19:06:59.652 4d00 Delete type=0 #14
+2025/04/26-15:56:48.674 44b4 Reusing MANIFEST C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\Local Storage\leveldb/MANIFEST-000001
+2025/04/26-15:56:48.689 44b4 Recovering log #18
+2025/04/26-15:56:48.690 44b4 Reusing old log C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\Local Storage\leveldb/000018.log 

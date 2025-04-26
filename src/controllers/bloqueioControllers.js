@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getAllBloqueios = getAllBloqueios;
 exports.createBloqueio = createBloqueio;
+exports.deleteBloqueio = deleteBloqueio;
 const Bloqueio_1 = require("../models/Bloqueio");
 function getAllBloqueios(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -24,10 +25,17 @@ function getAllBloqueios(req, res) {
 function createBloqueio(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { barber, date, startTime, endTime, motivo } = req.body;
+            const { barber, startDate, endDate, startTime, endTime, motivo } = req.body;
+            // Verificar se endDate é anterior a startDate (caso fornecido)
+            if (endDate && new Date(endDate) < new Date(startDate)) {
+                return res.status(400).json({
+                    error: "Data de fim não pode ser anterior à data de início.",
+                });
+            }
             const newBloqueio = new Bloqueio_1.Bloqueio({
                 barber,
-                date,
+                startDate,
+                endDate,
                 startTime,
                 endTime,
                 motivo,
@@ -39,6 +47,24 @@ function createBloqueio(req, res) {
         }
         catch (error) {
             return res.status(500).json({ error: "Erro ao criar bloqueio" });
+        }
+    });
+}
+function deleteBloqueio(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const { id } = req.params; // Obtém o ID da URL
+            // Tenta encontrar e remover o bloqueio pelo ID
+            const bloqueioRemovido = yield Bloqueio_1.Bloqueio.findByIdAndDelete(id);
+            if (!bloqueioRemovido) {
+                return res.status(404).json({ error: "Bloqueio não encontrado." });
+            }
+            return res
+                .status(200)
+                .json({ message: "Bloqueio excluído com sucesso!", bloqueioRemovido });
+        }
+        catch (error) {
+            return res.status(500).json({ error: "Erro ao excluir bloqueio." });
         }
     });
 }
