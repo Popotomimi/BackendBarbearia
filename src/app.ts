@@ -63,7 +63,7 @@ import Logger from "../config/logger";
 import morganMiddleware from "./middleware/morgamMiddleware";
 
 // Manter o servidor on
-manterServidorAtivo();
+// manterServidorAtivo();
 
 app.use(morganMiddleware);
 
