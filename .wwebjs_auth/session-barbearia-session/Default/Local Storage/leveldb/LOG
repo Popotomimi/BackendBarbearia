@@ -1,3 +1,6 @@
-2025/04/26-15:56:48.674 44b4 Reusing MANIFEST C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\Local Storage\leveldb/MANIFEST-000001
-2025/04/26-15:56:48.689 44b4 Recovering log #18
-2025/04/26-15:56:48.690 44b4 Reusing old log C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\Local Storage\leveldb/000018.log 
+2025/09/19-00:33:02.606 4860 Creating DB C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\Local Storage\leveldb since it was missing.
+2025/09/19-00:33:02.635 4860 Reusing MANIFEST C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\Local Storage\leveldb/MANIFEST-000001
+2025/09/19-00:33:02.635 4860 Recovering log #18
+2025/09/19-00:33:02.636 4860 Reusing old log C:\Users\Roberto\Desktop\BackendBarbearia\.wwebjs_auth\session-barbearia-session\Default\Local Storage\leveldb/000018.log 
+2025/09/19-00:33:02.636 4860 Delete type=2 #15
+2025/09/19-00:33:02.636 4860 Delete type=2 #17

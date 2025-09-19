@@ -4,8 +4,23 @@ const qrcode = require("qrcode-terminal");
 // Configurar o cliente WhatsApp com autenticação persistente
 const client = new Client({
   authStrategy: new LocalAuth({
-    clientId: "barbearia-session", // Identificador único para sua sessão
+    clientId: "barbearia-session",
   }),
+  webVersionCache: {
+    type: "remote",
+    remotePath:
+      "https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html",
+  },
+  puppeteer: {
+    headless: true,
+    args: [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--disable-accelerated-2d-canvas",
+      "--disable-gpu",
+    ],
+  },
 });
 
 // Gerar o QR Code para login
