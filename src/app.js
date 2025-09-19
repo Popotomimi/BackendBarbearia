@@ -17,6 +17,7 @@ const express_1 = __importDefault(require("express"));
 const agendaScheduler_1 = require("./services/agendaScheduler");
 const config_1 = __importDefault(require("config"));
 const cors = require("cors");
+const manterServidorAtivo_1 = __importDefault(require("./utils/manterServidorAtivo"));
 const app = (0, express_1.default)();
 // Inicializar o agendador
 (0, agendaScheduler_1.inicializarAgendador)();
@@ -53,7 +54,7 @@ const logger_1 = __importDefault(require("../config/logger"));
 // Middlewares
 const morgamMiddleware_1 = __importDefault(require("./middleware/morgamMiddleware"));
 // Manter o servidor on
-// manterServidorAtivo();
+(0, manterServidorAtivo_1.default)();
 app.use(morgamMiddleware_1.default);
 app.use("/api/", router_1.default);
 app.listen(3000, () => __awaiter(void 0, void 0, void 0, function* () {

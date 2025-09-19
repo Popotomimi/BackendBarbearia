@@ -64,14 +64,8 @@ function enviarMensagemBarbeiro(barber, cliente) {
         try {
             // Definir o número do barbeiro com base no nome
             let telefoneBarbeiro = "";
-            if (barber === "Gui") {
-                telefoneBarbeiro = "+5511985465474";
-            }
-            else if (barber === "Gabriel") {
-                telefoneBarbeiro = "+5511976560378";
-            }
-            else if (barber === "Buguinha") {
-                telefoneBarbeiro = "+5511913370291";
+            if (barber === "Artista do Corte") {
+                telefoneBarbeiro = "+5511959533499";
             }
             else {
                 console.error("Barbeiro não encontrado!");
